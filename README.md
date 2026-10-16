@@ -1,159 +1,111 @@
-# Sign-Language-Recognition-System
-A real-time sign language recognition system built with Python, MediaPipe, and Dynamic Time Warping (DTW). Record custom sign gestures and recognize them in real-time with voice feedback.
-
-Features
-✨ Real-Time Recognition - Instantly recognize recorded signs from webcam input
-🎙️ Voice Output - Offline text-to-speech feedback for recognized signs
-🎬 Custom Sign Recording - Record and save your own sign gestures
-🔄 Mode Switching - Seamlessly toggle between recording and recognition modes
-⚙️ Quality Control - DTW threshold filtering for accurate recognition
-🎯 Professional UI - Clear status display and intuitive keyboard controls
-💻 CPU-Based - Runs efficiently on standard laptops without GPU
-
-Quick Start
-Installation
-# Clone the repository
-git clone <repository-url>
-cd sign_language
-
-# Create virtual environment
+1. About the Project
+The Sign Language Recognition System is a Python-based application that recognizes hand gestures using a webcam and converts them into text and voice.
+For example, if you record a gesture and name it “Hello,” the system can recognize that gesture later and speak the word “Hello” aloud.
+The project uses MediaPipe to detect hand movements and Dynamic Time Warping (DTW) to compare gestures.
+2. Main Features
+- Real-Time Recognition: Recognizes recorded gestures using a webcam.
+- Voice Output: Speaks the recognized word aloud.
+- Record Custom Signs: Allows users to record and save their own gestures.
+- Two Modes: Switch between recording new signs and recognizing existing signs.
+- Accuracy Control: Uses a DTW threshold to decide whether a gesture matches a saved sign.
+- CPU-Based: Runs on a normal laptop without requiring a GPU.
+3. Technologies Used
+Technology	Simple Explanation
+Python	Main programming language
+OpenCV	Opens the webcam and displays video
+MediaPipe	Detects hand and body landmarks
+DTW	Compares a new gesture with saved gestures
+NumPy	Performs mathematical calculations
+pyttsx3	Converts recognized text into speech
+4. How Does It Work?
+Step 1: Capture Video
+The webcam captures the user's hand movements.
+Step 2: Detect Hand Landmarks
+MediaPipe identifies important points on the hand, such as fingertips and join
+Step 3: Compare Gestures
+DTW compares the captured gesture with the gestures saved earlier
+Step 4: Display and Speak
+The application displays the recognized word and speaks it aloud.
+5. How to Run the Project
+First, install Python and the required libraries.
+Open the terminal in your project folder and run:
 python -m venv .venv
-.venv\Scripts\Activate.ps1  # Windows
-source .venv/bin/activate   # macOS/Linux
-
-# Install dependencies
+.venv\Scripts\Activate.ps1
 pip install -r requirements_updated.txt
-Run the Application
 python main.py
-Keyboard Controls
-Key	Action
-r	Record/Stop gesture
-m	Toggle RECORD/RECOGNIZE mode
-n	Record new sign (name input)
-q	Quit application
-How It Works
-Recording Mode
-Press m to enter RECORD mode
-Press n to start recording a new sign
-Enter the sign name when prompted
-Press r to begin capturing
-Perform the gesture (aim for ~2 seconds)
-Press r again to save
-Recognition Mode
-Make sure you're in RECOGNIZE mode (press m if needed)
-Press r to start recognition
-Perform a recorded gesture
-Press r to stop
-The system will display the recognized sign and speak it aloud
-Technologies Used
-OpenCV - Real-time video capture and display
-MediaPipe - Hand and pose landmark detection
-Dynamic Time Warping (DTW) - Gesture sequence matching and similarity computation
-NumPy - Numerical operations and array manipulation
-pyttsx3 - Offline text-to-speech synthesis
-Project Structure
+
+
+These commands create a virtual environment, install the required libraries, and start the application on Windows.
+6. Keyboard Controls
+Key	Function
+m	Switch between recording and recognition modes
+n	Enter the name of a new sign
+r	Start or stop recording/recognition
+q	Close the application
+7. How to Record and Recognize a Sign
+To record a new sign:
+1. Press m to enter recording mode.
+2. Press n and enter a name, such as Hello.
+3. Press r and perform the hand gesture for around two seconds.
+4. Press r again to save the gesture.
+To recognize a sign:
+1. Switch to recognition mode using m.
+2. Press r to start recognition.
+3. Perform the gesture you previously recorded.
+4. Press r again to stop.
+5. The system displays the matching word and speaks it aloud.
+8. Project Folder Structure
 sign_language/
-├── main.py                    # Application entry point
-├── sign_recorder.py           # Core recognition and recording logic
-├── webcam_manager.py          # Video display and UI rendering
-│
+├── main.py
+├── sign_recorder.py
+├── webcam_manager.py
 ├── utils/
-│   ├── voice_output.py        # Text-to-speech interface
-│   ├── sign_storage.py        # Save/load sign data
-│   ├── landmark_utils.py      # Hand landmark extraction
-│   ├── mediapipe_utils.py     # MediaPipe pipeline
-│   └── dtw.py                 # DTW distance computation
-│
+│   ├── voice_output.py
+│   ├── sign_storage.py
+│   ├── landmark_utils.py
+│   └── dtw.py
 ├── models/
-│   ├── hand_model.py          # Hand angle feature extraction
-│   ├── pose_model.py          # Pose landmark handling
-│   └── sign_model.py          # Sign sequence processing
-│
+│   ├── hand_model.py
+│   ├── pose_model.py
+│   └── sign_model.py
 └── data/
-    └── signs/                 # Saved custom sign data
-System Requirements
-Python: 3.8 or higher
-Operating System: Windows, macOS, or Linux
-Camera: Standard webcam
-RAM: Minimum 4GB (8GB recommended)
-CPU: Standard dual-core processor or better
-GPU: Not required (CPU-based)
-Performance
-Recording: Captures 50 frames (~2 seconds)
-Recognition: 0.5-2 seconds per gesture
-Voice Output: Instant (background thread)
-Frame Rate: ~25 FPS on standard CPU
-Memory Usage: ~50MB for loaded signs
-Configuration
-Adjusting DTW Threshold
-The DTW threshold controls recognition sensitivity. Edit in sign_recorder.py:
+    └── signs/
 
-self.dtw_threshold = 2000  # Lower = stricter, Higher = lenient
-Voice Output Settings
-Customize voice in utils/voice_output.py:
 
-self.engine.setProperty('rate', 150)      # Speed in WPM
-self.engine.setProperty('volume', 0.9)    # Volume 0-1
-Documentation
-QUICKREF_V2.md - Quick reference card with all controls
-UPGRADE_GUIDE_V2.md - Detailed feature documentation
-MASTER_SUMMARY_V2.md - Complete project overview
-Future Enhancements
-Planned features marked in code (see TODO comments):
-
-Static Alphabet Recognition - A-Z sign recognition
-Speech-to-Sign Translation - Convert spoken words to signs
-Advanced ML Classifier - Improved gesture classification
-Sign Language Database - Pre-built gesture library
-Troubleshooting
-Webcam Not Opening
-Ensure no other application is using the camera
-Check camera permissions in system settings
-Try restarting the application
-Voice Not Working
-Verify pyttsx3 is installed: pip install pyttsx3
-Check system volume is not muted
-On Windows, ensure text-to-speech engine is installed
-Poor Recognition
-Ensure adequate lighting
-Perform gestures clearly and consistently
-Consider lowering the DTW threshold for stricter matching
-Record multiple examples of each sign
-Acknowledgements
-This project was developed with the assistance of GitHub Copilot, which served as a coding assistant throughout the development process. Copilot was utilized for:
-
-Debugging and troubleshooting implementation issues
-Code refactoring and structural improvements
-Feature development and extension
-Code documentation and best practices
-Project Inspiration
-The initial concept and technical foundation for real-time gesture recognition were inspired by the open-source repository Sign-Language-Recognition--MediaPipe-DTW by gabguerin. That repository was invaluable for understanding:
-
-MediaPipe-based hand landmark detection and extraction
-Dynamic Time Warping (DTW) for sequence-based gesture matching
-End-to-end pipeline architecture for sign recognition
-Original Implementation
-While conceptually inspired by the above work, this repository contains significant original modifications and features, including:
-
-Continuous real-time execution loop with persistent state management
-Custom multi-sign recording system with disk-based persistence
-Enhanced gesture recognition with configurable quality thresholds
-Offline text-to-speech integration (pyttsx3) for audio feedback
-Mode-switching architecture (Record/Recognize) for flexible operation
-Improved UI with real-time status display and keyboard controls
-Professional code structure, documentation, and error handling
-Core Technologies
-Built with:
-
-OpenCV – Real-time video processing
-MediaPipe – Hand and pose landmark detection
-Dynamic Time Warping (DTW) – Gesture sequence comparison
-NumPy – Numerical computation
-pyttsx3 – Offline text-to-speech synthesis
-This acknowledgement reflects the collaborative nature of modern software development while maintaining honest attribution to both the AI assistant and the open-source community that inspired this work.
-
-Contributing
-Contributions are welcome! Please feel free to submit issues or pull requests to improve the project.
-
-Contact
-For questions or suggestions, please open an issue in the repository.
+- main.py — Starts the application.
+- sign_recorder.py — Handles recording and recognition.
+- webcam_manager.py — Manages webcam video and the display.
+- voice_output.py — Speaks the recognized word.
+- sign_storage.py — Saves and loads recorded gestures.
+- landmark_utils.py — Processes hand landmarks.
+- dtw.py — Compares gesture sequences.
+- models/ — Contains code for processing hand, pose, and sign data.
+- data/signs/ — Stores recorded signs.
+9. System Requirements
+- Python 3.8 or higher, subject to library compatibility.
+- Windows, macOS, or Linux.
+- A working webcam.
+- At least 4 GB RAM; 8 GB is recommended.
+- A standard CPU. No GPU is required.
+10. Advantages
+- Easy to use.
+- Works in real time.
+- Supports custom gestures.
+- Provides both text and voice output.
+- Works offline for speech synthesis.
+- Does not require expensive hardware.
+11. Limitations
+- Users must record gestures before the system can recognize them.
+- Recognition can be affected by lighting, camera quality, and how consistently a gesture is performed.
+- The DTW threshold may need adjustment.
+- It does not automatically recognize every sign in a complete sign language.
+- Recognizing individual gestures is not the same as translating full sign-language sentences, which can require facial expressions, grammar, and context.
+12. Future Improvements
+- Add recognition for alphabet signs from A to Z.
+- Include a ready-made library of common signs.
+- Improve recognition using machine-learning classifiers.
+- Convert spoken words into sign-language animations.
+- Support more signs and potentially multiple sign languages.
+13. Project Summary
+The Sign Language Recognition System uses a webcam to capture hand gestures, MediaPipe to identify hand landmarks, and DTW to compare those movements with previously recorded gestures. When a match is found, the system displays the corresponding word and speaks it using offline text-to-speech.
+In simple words: You teach the system a hand gesture once, and it can try to recognize that gesture again whenever you perform it in front of the webcam.
