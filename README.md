@@ -1,3 +1,5 @@
+**Sign-Language-Recognition-System**
+
 1. About the Project
 The Sign Language Recognition System is a Python-based application that recognizes hand gestures using a webcam and converts them into text and voice.
 For example, if you record a gesture and name it “Hello,” the system can recognize that gesture later and speak the word “Hello” aloud.
